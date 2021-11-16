@@ -1,8 +1,8 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ListBooks from "./ListBooks";
 import SearchBooks from "./SearchBooks";
-import { Route } from 'react-router-dom';
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -19,11 +19,12 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBooks/>
-        ) : (
-          <ListBooks/>
-        )}
+        <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<ListBooks/>}/>
+          <Route path="/search" element={<SearchBooks/>}/>
+        </Routes>
+        </BrowserRouter>
       </div>
     )
   }
