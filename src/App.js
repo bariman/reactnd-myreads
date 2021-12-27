@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import ListBooks from "./ListBooks";
 import SearchBooks from "./SearchBooks";
 import './App.css'
@@ -36,12 +36,12 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <BrowserRouter>
+        <HashRouter basename="/">
         <Routes>
           <Route exact path="/" element={<ListBooks moveBook={this.moveBook} books={this.state.books}/>}/>
           <Route path="/search" element={<SearchBooks moveBook={this.moveBook} />}/>
         </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     )
   }
