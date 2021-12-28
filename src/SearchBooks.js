@@ -9,15 +9,6 @@ class SearchBooks extends React.Component {
     query: ''
   }
 
-  componentDidMount() {
-    BookAPI.getAll()
-      .then((books) => {
-        this.setState(() => ({
-          books: books
-        }))
-      })
-  }
-
   updateQuery = (query) => {
     query = query.trim()
     this.setState(() => ({
@@ -25,15 +16,19 @@ class SearchBooks extends React.Component {
     }))
     if (query !== '') {
       this.searchBooks(query)
+    } else {
+      this.setState({
+        books: []
+      });
     }
   }
 
   searchBooks = (query) => {
     BookAPI.search(query)
       .then((books) => {
-        !books || books.error ? this.setState({ books: [] }) : this.setState({ books: books })
-      }
-    );
+          !books || books.error ? this.setState({books: []}) : this.setState({books: books})
+        }
+      );
   }
 
   render() {
@@ -59,15 +54,15 @@ class SearchBooks extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          { books.length ?
+          {books.length ?
             <ol className="books-grid">
-            {books.map((book) => (
-              <li key={book.id} className='book'>
-                <Book moveBook={this.props.moveBook} book={book}/>
-              </li>
-            ))}
-          </ol>
-          : <p>No results</p>
+              {books.map((book) => (
+                <li key={book.id} className='book'>
+                  <Book moveBook={this.props.moveBook} book={book}/>
+                </li>
+              ))}
+            </ol>
+            : <p>No results</p>
           }
         </div>
       </div>
