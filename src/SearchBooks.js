@@ -32,7 +32,18 @@ class SearchBooks extends React.Component {
   }
 
   render() {
-    const books = this.state.books
+    const books = this.state.books;
+    const myBooks = this.props.myBooks;
+    const booksWithShelf = books.map(book => {
+      myBooks.map(myB => {
+        if (myB.id === book.id) {
+          book.shelf = myB.shelf;
+        }
+        return myB;
+      });
+      return book;
+    });
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -54,9 +65,9 @@ class SearchBooks extends React.Component {
           </div>
         </div>
         <div className="search-books-results">
-          {books.length ?
+          {booksWithShelf.length ?
             <ol className="books-grid">
-              {books.map((book) => (
+              {booksWithShelf.map((book) => (
                 <li key={book.id} className='book'>
                   <Book moveBook={this.props.moveBook} book={book}/>
                 </li>

@@ -38,8 +38,8 @@ class BooksApp extends React.Component {
       <div className="app">
         <HashRouter basename="/">
         <Routes>
-          <Route exact path="/" element={<ListBooks moveBook={this.moveBook} books={this.state.books}/>}/>
-          <Route path="/search" element={<SearchBooks moveBook={this.moveBook} />}/>
+          <Route exact path="/" element={<ListBooks moveBook={this.moveBook} myBooks={this.state.books}/>}/>
+          <Route path="/search" element={<SearchBooks moveBook={this.moveBook} myBooks={this.state.books} />}/>
         </Routes>
         </HashRouter>
       </div>

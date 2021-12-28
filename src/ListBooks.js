@@ -18,8 +18,8 @@ const bookshelves = [
 ]
 
 class ListBooks extends React.Component {
-
   render() {
+    const {myBooks, moveBook} = this.props
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -29,9 +29,9 @@ class ListBooks extends React.Component {
           <div>
             {bookshelves.map((bookshelf) => (
               <Bookshelf key={bookshelf.key}
-                         books={this.props.books.filter(book => book.shelf === bookshelf.key)}
+                         books={myBooks.filter(book => book.shelf === bookshelf.key)}
                          bookshelf={bookshelf}
-                         moveBook={this.props.moveBook}
+                         moveBook={moveBook}
               />
             ))}
           </div>
