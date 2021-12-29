@@ -29,7 +29,6 @@ class SearchBooks extends React.Component {
   }
 
   searchBooks = (query) => {
-    console.log('call api')
     BookAPI.search(query)
       .then((books) => {
           !books || books.error ? this.setState({books: []}) : this.setState({books: books})
