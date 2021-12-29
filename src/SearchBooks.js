@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import * as BookAPI from "./BooksAPI"
 import Book from "./Book";
+import debounce from 'lodash.debounce';
 
 class SearchBooks extends React.Component {
   state = {
@@ -9,12 +10,16 @@ class SearchBooks extends React.Component {
     query: ''
   }
 
+  componentWillUnmount() {
+    this.searchBooksDebounced.cancel();
+  }
+
   updateQuery = (query) => {
     this.setState(() => ({
       query: query
     }))
     if (query !== '') {
-      this.searchBooks(query)
+      this.searchBooksDebounced(query)
     }
     else {
       this.setState({
@@ -24,12 +29,15 @@ class SearchBooks extends React.Component {
   }
 
   searchBooks = (query) => {
+    console.log('call api')
     BookAPI.search(query)
       .then((books) => {
           !books || books.error ? this.setState({books: []}) : this.setState({books: books})
         }
       );
   }
+
+  searchBooksDebounced = debounce(this.searchBooks, 300)
 
   render() {
     const books = this.state.books;
