@@ -1,16 +1,8 @@
 import React from 'react'
 import Book from "./Book";
+import PropTypes from 'prop-types';
 
 class Bookshelf extends React.Component {
-  state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    showSearchPage: false
-  }
 
   render() {
     const books = this.props.books
@@ -32,6 +24,12 @@ class Bookshelf extends React.Component {
             </div>
     )
   }
+}
+
+Bookshelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  bookshelf: PropTypes.object.isRequired,
+  moveBook: PropTypes.func.isRequired,
 }
 
 export default Bookshelf
