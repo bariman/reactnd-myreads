@@ -10,13 +10,13 @@ class SearchBooks extends React.Component {
   }
 
   updateQuery = (query) => {
-    query = query.trim()
     this.setState(() => ({
       query: query
     }))
     if (query !== '') {
       this.searchBooks(query)
-    } else {
+    }
+    else {
       this.setState({
         books: []
       });
